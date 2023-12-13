@@ -38,9 +38,9 @@
   <main>
     <section class="inputs">
       <div>
-          <label for="bill">Bill</label>
-          <input type="number" min="0.00" max="10000.00" step="0.01" name="bill" id="bill" placeholder="142.55"/>
-       
+        <label for="bill">Bill</label>
+        <input type="number" min="0.00" max="10000.00" step="0.01" name="bill" id="bill" placeholder="142.55" />
+
       </div>
 
       <div>
@@ -51,33 +51,32 @@
             <label for="ten">10%</label>
           </div>
           <div>
-
-            <input type="radio" id="15" name="tip" value="15">
-            <label for="15">15%</label>
+            <input type="radio" id="fifteen" name="tip" value="15">
+            <label for="fifteen">15%</label>
           </div>
           <div>
-            <input type="radio" id="20" name="tip" value="20">
-            <label for="20">20%</label>
+            <input type="radio" id="twenty" name="tip" value="20" checked>
+            <label for="twenty">20%</label>
           </div>
           <div>
-            <input type="radio" id="25" name="tip" value="25">
-            <label for="25">25%</label>
+            <input type="radio" id="twenty-five" name="tip" value="25">
+            <label for="twenty-five">25%</label>
           </div>
           <div>
-            <input type="radio" id="50" name="tip" value="50">
-            <label for="50">50%</label>
+            <input type="radio" id="fifty" name="tip" value="50">
+            <label for="fifty">50%</label>
           </div>
           <div>
             <input type="radio" id="custom" name="tip" value="custom">
             <label for="custom" id="custom-label">
-              <input type="number" min="0" max="100" step="5" name="custom-tip" id="custom-tip" placeholder="custom"/>
-              </label>
+              <input type="number" min="0" max="100" step="5" name="custom-tip" id="custom-tip" placeholder="custom" />
+            </label>
           </div>
         </div>
       </div>
       <div>
         <label for="num-people">Number of People</label>
-        <input type="number" min="0" max = "10" id="num-people">
+        <input type="number" min="0" max="10" id="num-people">
       </div>
 
 
@@ -89,7 +88,7 @@
           <p>Tip Amount</p>
           <p class="per-person-label">/ person</p>
         </div>
-        <div  class="display-num">
+        <div class="display-num">
           $<span id="tip-per-person">0.00</span>
         </div>
       </section>
