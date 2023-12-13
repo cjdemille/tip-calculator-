@@ -13,7 +13,6 @@ body {
     font-size: 16px;
     font-weight: 700;
     background-color: var(--light-grayish-cyan);
-    height: 100vh;
     margin: 0;
     padding: 0;
 }
@@ -24,17 +23,16 @@ header img {
 }
 
 main {
-    min-height: 60%;
     background-color: var(--white);
     border-top-right-radius: 3rem;
     border-top-left-radius: 3rem;
     padding: 3rem 3rem 5rem;
     box-sizing: border-box;
-    width: 100%;
+    /* width: 100%; */
 
     /* margin: 3rem 0; */
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
 }
 
 label {
