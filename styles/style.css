@@ -15,6 +15,9 @@ body {
     background-color: var(--light-grayish-cyan);
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 header img {
@@ -28,11 +31,7 @@ main {
     border-top-left-radius: 3rem;
     padding: 3rem 3rem 5rem;
     box-sizing: border-box;
-    /* width: 100%; */
-
-    /* margin: 3rem 0; */
-    /* position: absolute;
-    bottom: 0; */
+    max-height: 70%;
 }
 
 label {
@@ -144,4 +143,21 @@ button {
     text-transform: uppercase;
     font-family: 'Space Mono', monospace;
     letter-spacing: 2px;
+}
+
+.people-error {
+    border: 1px solid red;
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.num-people-error-msg {
+    color: red;
+}
+
+.bill-error-msg {
+    color: red;
 }
