@@ -4,23 +4,15 @@ const totalDisplay = document.querySelector('#total-per-person');
 const tipDisplay = document.querySelector('#tip-per-person');
 const billInput = document.querySelector('#bill');
 const customTip = document.querySelector('#custom-tip');
+customTip.setAttribute("placeholder", "hi!")
 const numPeopleInput = document.querySelector('#num-people');
 const numPeopleErrorMsg = document.querySelector('.num-people-error-msg')
 const billErrorMsg = document.querySelector('.bill-error-msg');
+const tipSelectors = document.body.querySelectorAll('.tip-input')
 
-const tenPercent = document.querySelector('#ten');
-const fifteenPercent = document.querySelector('#fifteen');
-const twentyPercent = document.querySelector('#twenty');
-const twentyFivePercent = document.querySelector('#twenty-five');
-const fiftyPercent = document.querySelector('#fifty');
 
 const resetBtn = document.querySelector('#reset');
 
-// const setDisplay = () => {
-//     totalDisplay.innerHTML = formatter.format(0);
-//     tipDisplay.innerHTML = formatter.format(0);
-// }
-// setDisplay();
 
 const formatter = new Intl.NumberFormat(
     'en-US',
@@ -140,12 +132,11 @@ numPeopleInput.addEventListener('input', () => {
     validateNumPeopleIsInt();
     runUpdate();
 });
+tipSelectors.forEach((tipInput) => tipInput.addEventListener('change', runUpdate))
 
-tenPercent.addEventListener('change', runUpdate);
-fifteenPercent.addEventListener('change', runUpdate);
-twentyPercent.addEventListener('change', runUpdate);
-twentyFivePercent.addEventListener('change', runUpdate);
-fiftyPercent.addEventListener('change', runUpdate);
+customTip.addEventListener('input', () => {
+    console.log(Number(customTip.value));
+})
 resetBtn.addEventListener('click', reset);
 
 // To Dos
