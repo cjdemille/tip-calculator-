@@ -1,0 +1,57 @@
+.display{
+    background-color: $color-dark-green;
+    border-radius: 2rem;
+    padding:2rem;
+
+    &__display-group{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    &__label{
+        font-size:1.6rem;
+        color:$color-white;
+
+        &-unit{
+            display: block;
+            font-size: 1.3rem;
+            color:$color-green-gray-light;
+        }
+    }
+    &__amount{
+        font-size: 3.2rem;
+        color:$color-cyan;
+    }
+}
+
+.btn{
+    background-color: $color-cyan;
+    border: none;
+    color:$color-dark-green;
+    width:100%;
+    padding:1rem;
+    border-radius: 3px;
+    font-size: 2rem;
+    font-family: 'Space Mono' , monospace;
+    text-transform: uppercase;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $color-green-gray-medium;
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .display{
+        width:48%;
+        height:40rem;
+        float:right;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        vertical-align: middle;
+        position: relative;
+    }
+
+}

@@ -1,0 +1,100 @@
+.form{
+    &__input-group{
+        margin-bottom: 2rem;
+    }
+    &__input-label, &__header{
+        font-size:1.6rem;
+        margin-bottom:1.5rem;
+        display: block;
+        color:$color-green-gray-dark;
+    }
+
+
+    &__input-label--num-people{
+        display:flex;
+        justify-content: space-between;
+    }
+    &__input-label--error {
+        color: red;
+    }
+    &__input--text{
+        &--bill, &--num-people{
+            display:inline-block;
+            width:100%;
+            padding:1rem 1rem 1rem 0;
+            font-size:2.4rem;
+            font-family: 'Space Mono' , monospace;
+            text-align: right;
+            background-color: $color-green-gray-light;
+            color:$color-dark-green;
+            border: none;
+            border-radius: 3px;
+            transition: all .2s;
+        }
+        &--bill:focus, &--num-people:focus{
+            outline: 2px solid $color-cyan;
+        }
+
+        &--bill{
+            background-image: url('../images/icon-dollar.svg');
+            background-repeat: no-repeat;
+            background-position: 1rem center;
+        }
+        &--num-people{
+            background-image: url('../images/icon-person.svg');
+            background-repeat: no-repeat;
+            background-position: 1rem center;
+        }
+    }
+    &__input-group--tips{
+        display:grid;
+        width:100%;
+        grid-template-columns: 1fr 1fr;
+        gap:1.5rem;
+        color: $color-white;
+        text-align: center;
+       
+
+        input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+            transition: all 3s;
+        }
+    }
+    &__input-label--tip{
+        background-color: $color-dark-green;
+        padding:1rem;
+        border-radius: 3px;
+        font-size: 2.4rem;;
+        transition: all .2s;
+
+        &:hover{
+            cursor: pointer;
+            background-color: $color-green-gray-medium;
+        }
+    }
+
+    input[type="radio"]:focus + &__input-label--tip{
+        color: $color-dark-green;
+        background-color: $color-cyan;
+        
+    }
+    input[type="radio"]:checked + &__input-label--tip{
+        color: $color-dark-green;
+        background-color: $color-cyan;
+    }
+}
+
+@media screen and (min-width:1100px) {
+    .form{
+        width:48%;
+        float:left;
+        display: table-cell;
+        
+        &__input-group--tips{
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+    
+}

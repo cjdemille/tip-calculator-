@@ -1,118 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-
+  
   <title>Frontend Mentor | Tip calculator app</title>
 
   <!-- Google Fonts -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="css/style.css">
 
-  <link rel="stylesheet" href="styles/style.css">
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution {
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .attribution a {
-      color: hsl(228, 45%, 44%);
-    }
-  </style>
 </head>
-
 <body>
-  <header>
-    <img src="images/logo.svg" alt="Splitter Logo">
+  <header class="header">
+    <img src="images/logo.svg" alt="Splitter Logo" class="header__img">
   </header>
-
   <main>
-    <section class="inputs">
-      <div>
-        <label for="bill">Bill</label>
-        <input type="number" min="0.00" max="10000.00" step="0.01" name="bill" id="bill" placeholder="142.55" />
-        <p class="bill-error-msg hidden">
-          Must be valid amount
-        </p>
+    <form action="#" class="form">
+      <div class="form__input-group">
+        <label for="bill" class="form__input-label">Bill</label>
+        <input type="text" id ="bill" class="form__input--text--bill" placeholder="0" required>
       </div>
-
-      <div>
-        <p>Select Tip % </p>
-        <div class="tip-options">
-          <div>
-            <input type="radio" id="ten" name="tip" value="10" class="tip-input">
-            <label for="ten">10%</label>
-          </div>
-          <div>
-            <input type="radio" id="fifteen" name="tip" value="15" class="tip-input">
-            <label for="fifteen">15%</label>
-          </div>
-          <div>
-            <input type="radio" id="twenty" name="tip" value="20" class="tip-input" checked>
-            <label for="twenty">20%</label>
-          </div>
-          <div>
-            <input type="radio" id="twenty-five" name="tip" value="25" class="tip-input">
-            <label for="twenty-five">25%</label>
-          </div>
-          <div>
-            <input type="radio" id="fifty" name="tip" value="50" class="tip-input">
-            <label for="fifty">50%</label>
-          </div>
-          <div>
-            <input type="radio" id="custom" name="tip" value="custom" class="tip-input">
-            <label for="custom" id="custom-label">
-              <input type="number" min="0" max="100" step="5" name="custom-tip" id="custom-tip" placeholder="custom" />
-            </label>
-          </div>
+      <div class="form__input-group">
+        <h2 class="form__header">Select Tip%</h2>
+        <div class="form__input-group--tips">
+          <input type="radio" name = "tip" id="form__input--tip-5" class="form__input--tip" value="5">
+          <label for="form__input--tip-5" class="form__input-label--tip">5%</label>
+          <input type="radio" name = "tip" id="form__input--tip-10" class="form__input--tip" value = "10">
+          <label for="form__input--tip-10" class="form__input-label--tip">10%</label>
+          <input type="radio" name = "tip" id="form__input--tip-15" class="form__input--tip" value = "15" checked>
+          <label for="form__input--tip-15" class="form__input-label--tip">15%</label>
+          <input type="radio" name = "tip" id="form__input--tip-25" class="form__input--tip" value = "25">
+          <label for="form__input--tip-25" class="form__input-label--tip">25%</label>
+          <input type="radio" name = "tip" id="form__input--tip-50" class="form__input--tip" value = "50">
+          <label for="form__input--tip-50" class="form__input-label--tip">50%</label>
+          <!-- <input type="radio" name = "tip" id="form__input--tip--custom" class="form__input--tip--custom" value = "custom">
+          <label for="form__input--tip--custom" class="form__input-label--tip">custom</label> -->
         </div>
       </div>
-      <div>
-        <label for="num-people">Number of People</label>
-        <input type="number" min="0" max="10" id="num-people">
-        <p class="num-people-error-msg hidden">
-          Must be a whole number
-        </p>
+      <div class="form__input-group">
+        <label for="num-people" class="form__input-label form__input-label--num-people">Number of people <span class="form__input-label--error hidden">Can't be zero</span></label> 
+        <input type="number" id ="num-people" class="form__input--text--num-people error" placeholder="0" min="0" required>
       </div>
-
-
-
-    </section>
+    </form>
     <section class="display">
-      <section class="tip-amount">
-        <div class="label">
-          <p>Tip Amount</p>
-          <p class="per-person-label">/ person</p>
+      <div class="display__display-group">
+        <div class="display__label">
+          Tip Amount <span class="display__label-unit">/ person</span>
         </div>
-        <div class="display-num">
-          <span id="tip-per-person">0.00</span>
+        <div class="display__amount"id="display__amount--tip">
+          $0.00
         </div>
-      </section>
-      <section class="total">
-        <div class="label">
-          <p>Total</p>
-          <p class="per-person-label">/ person</p>
-        </div>
-        <div class="display-num">
-          <span id="total-per-person">0.00</span>
-        </div>
-      </section>
+      </div>
 
-      <button id="reset">Reset</button>
+      <div class="display__display-group">
+        <div class="display__label">
+          Total <span class="display__label-unit">/ person</span>
+        </div>
+        <div class="display__amount" id="display__amount--total">
+          $0.00
+        </div>
+      </div>
+      <button class="btn" id="reset-button">Reset</button>
+    </section>
+    
   </main>
-
-  </section>
-
-  <script src='js/app.js'></script>
+  
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://www.cjdemille.io">C.J. DeMille</a>.
+  </footer>
+  <script src="js/app.js"></script>
 </body>
-
 </html>

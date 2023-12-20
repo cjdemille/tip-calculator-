@@ -1,148 +1,80 @@
+// FORM ELEMENTS
+const bill = document.querySelector('#bill');
+const numPeople = document.querySelector('#num-people');
+const tipSelectors = document.querySelectorAll('.form__input--tip');
+const defaultTip = document.querySelector('#form__input--tip-15');
+const numPeopleError = document.querySelector('.form__input-label--error')
+// DISPLAY ELEMENTS
+const tipDisplay = document.querySelector('#display__amount--tip');
+const totalDisplay = document.querySelector('#display__amount--total')
+const resetBtn = document.querySelector('#reset-button');
 
-
-const totalDisplay = document.querySelector('#total-per-person');
-const tipDisplay = document.querySelector('#tip-per-person');
-const billInput = document.querySelector('#bill');
-const customTip = document.querySelector('#custom-tip');
-customTip.setAttribute("placeholder", "hi!")
-const numPeopleInput = document.querySelector('#num-people');
-const numPeopleErrorMsg = document.querySelector('.num-people-error-msg')
-const billErrorMsg = document.querySelector('.bill-error-msg');
-const tipSelectors = document.body.querySelectorAll('.tip-input')
-
-
-const resetBtn = document.querySelector('#reset');
-
-
+// NUMBER FORMATTER
 const formatter = new Intl.NumberFormat(
     'en-US',
     { style: 'currency', currency: 'USD' }
 )
-
-
 const reset = () => {
-    totalDisplay.innerHTML = formatter.format(0);
-    tipDisplay.innerHTML = formatter.format(0);
-    billInput.value = formatter.format(0);
-    numPeopleInput.value = 0;
-    twentyPercent.checked = true;
+    bill.value = formatter.format(0); 
+    defaultTip.checked = true;
+    numPeople.value = 0; 
+    tipDisplay.innerText = formatter.format(0);
+    totalDisplay.innerText = formatter.format(0);
 }
-const billError = () => {
-    var t = billInput.value;
-
+const billInputFromRight = (e) => {
+    let input = e.target.value.replace(/\D/g, '') //REMOVE NON DIGITS
+    input = input.padStart(3, '0');
+    let numValue = parseInt(input, 10) / 100;
+    let formattedValue = numValue.toFixed(2);
+    e.target.value = formattedValue;
 }
+const calculateTotal = () => {
+    const billNum = Number(bill.value); 
+    const numPeopleNum = Number(numPeople.value);
+    const totalPerPerson = billNum / numPeopleNum; 
 
-const reverseString = (str) => {
-    const splitString = str.split("");
-    const reverseArray = splitString.reverse();
-    const joinArray = reverseArray.join("");
-    return joinArray;
 
+    totalDisplay.innerText = formatter.format(totalPerPerson);
 }
-const billErrorDisplay = () => {
-    var t = billInput.value;
-    const reversed = reverseString(t);
-
-    if (reversed.indexOf(".") > 2) {
-        // billInput.value = t.slice(0, t.indexOf(".") + 3);
-        billErrorMsg.classList.remove('hidden');
-    } else {
-        billErrorMsg.classList.add('hidden');
-    }
-}
-const validateBillInput = () => {
-    var t = billInput.value;
-    billInput.value = t.indexOf(".") >= 2 ? t.slice(0, t.indexOf(".") + 3) : t
-    billErrorMsg.classList.add('hidden');
-}
-
-
-const validateNumPeopleIsInt = () => {
-    if (!Number.isInteger(Number(numPeopleInput.value))) {
-        numPeopleInput.classList.add('people-error');
-        numPeopleErrorMsg.classList.remove('hidden')
-    } else {
-        numPeopleInput.classList.remove('people-error');
-        numPeopleErrorMsg.classList.add('hidden')
-    }
-}
-
-const getTipValue = (ele) => {
-    for (i = 0; i < ele.length; i++) {
-        if (ele[i].type = "radio") {
-            if (ele[i].checked) {
-                console.log(ele[i].value)
-                return Number(ele[i].value);
+const getTipPercentage = () => {
+    for (i = 0; i < tipSelectors.length; i++) {
+        if (tipSelectors[i].type = "radio") {
+            if (tipSelectors[i].checked) {
+                percentage = Number(tipSelectors[i].value)/100;
+                return percentage;
             }
         }
     }
 }
 
-
-const calcTip = (tip) => {
-    const percentage = tip / 100;
-    return Number(billInput.value) * percentage;
+const calcTip = () => {
+    const tipPercentage = getTipPercentage(); 
+    const tip = Number(bill.value) * tipPercentage;
+    const tipPerPerson = tip / Number(numPeople.value); 
+    tipDisplay.innerText = formatter.format(tipPerPerson);
 }
 
-const runTip = () => {
-    const ele = document.getElementsByName('tip');
-    const tipVal = getTipValue(ele);
-    const tipAmount = calcTip(tipVal);
-    tipDisplay.innerHTML = tipAmount;
+const calcTotal = () => {
+    const tipPercentage = getTipPercentage(); 
+    const tipFactor = 1 + tipPercentage; 
+    const total = Number(bill.value) * tipFactor; 
+    const totalPerPerson = total / Number(numPeople.value);
+    totalDisplay.innerText = formatter.format(totalPerPerson);
 }
 
-// You need to break this into multiple functions
-const calculateTipAndTotal = () => {
-
-    const ele = document.getElementsByName('tip');
-    const tipVal = getTipValue(ele);
-    const tipAmount = calcTip(tipVal);
-    const tipPerPerson = tipAmount / Number(numPeopleInput.value);
-    const tipPerDisplay = formatter.format(tipPerPerson);
-    tipDisplay.innerHTML = tipPerDisplay
-    const totalAmount = tipAmount + Number(billInput.value);
-    console.log(totalAmount);
-    const personalAmount = totalAmount / Number(numPeopleInput.value)
-    const personalDisplay = formatter.format(personalAmount);
-    console.log(personalAmount);
-    totalDisplay.innerHTML = personalDisplay;
-
-
-}
-
-const runUpdate = () => {
-    if (Number(billInput.value) > 0 && Number(numPeopleInput.value) > 0) {
-        validateBillInput();
-        calculateTipAndTotal();
+const calcTipAndTotal = () =>{
+    if(Number(bill.value) > 0 && Number(numPeople.value) > 0 ){
+        numPeopleError.classList.add('hidden');
+        calcTip(); 
+        calcTotal(); 
+    }else if(Number(numPeople.value) <= 0){
+        numPeopleError.classList.toggle('hidden');
     }
 }
 
-billInput.addEventListener('input', () => {
-    billErrorDisplay();
-    runUpdate();
-}
-);
-billInput.addEventListener('change', () => {
-    validateBillInput();
-    runUpdate();
-}
-);
-
-numPeopleInput.addEventListener('input', () => {
-    validateNumPeopleIsInt();
-    runUpdate();
-});
-tipSelectors.forEach((tipInput) => tipInput.addEventListener('change', runUpdate))
-
-customTip.addEventListener('input', () => {
-    console.log(Number(customTip.value));
-})
+// EVENT LISTENERS
 resetBtn.addEventListener('click', reset);
-
-// To Dos
-
-// custom tip input 
-// make bill input populate like money 
-// refactor JS
-// fine tune styles for mobile
-// create desktop layout;
+bill.addEventListener('input', billInputFromRight);
+bill.addEventListener('input', calcTipAndTotal);
+numPeople.addEventListener('input', calcTipAndTotal);
+tipSelectors.forEach((tipInput) => tipInput.addEventListener('change', calcTipAndTotal))
